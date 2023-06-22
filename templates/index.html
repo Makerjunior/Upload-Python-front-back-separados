@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload de arquivos</title>
+    <style>
+      img {
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Upload de arquivos</h1>
+    <form method="post" enctype="multipart/form-data">
+      <input type="file" name="file">
+      <input type="submit">
+    </form>
+    <hr>
+    <h2>Lista de Arquivos</h2>
+    {{ file_list | safe }}
+    <hr>
+    {{ image_gallery | safe }}
+  </body>
+</html>
