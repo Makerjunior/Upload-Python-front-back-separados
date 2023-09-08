@@ -27,3 +27,6 @@ def download(filename):
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=8080)
+
+
+#ngrok http 80 --region=us --header="ngrok-skip-browser-warning: true"
