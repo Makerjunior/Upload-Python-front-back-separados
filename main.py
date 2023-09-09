@@ -6,7 +6,7 @@ from image_gallery_utils import get_image_gallery
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/upload', methods=['GET', 'POST'])
 def upload():
   if request.method == 'POST':
     file = request.files['file']
@@ -23,6 +23,10 @@ def upload():
 @app.route('/arquivos/<filename>')
 def download(filename):
   return send_from_directory('./arquivos', filename)
+
+@app.route('/')
+def login():
+  return render_template('login.html')
 
 
 if __name__ == '__main__':
