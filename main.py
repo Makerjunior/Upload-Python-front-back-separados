@@ -1,10 +1,26 @@
 import os
-from flask import Flask, request, send_from_directory, render_template
+from flask import Flask, request, send_from_directory, render_template, request, jsonify
 from file_list_utils import get_file_list
 from image_gallery_utils import get_image_gallery
 
+# Simulação de um banco de dados de usuários (substitua pelo seu banco de dados real)
+users = {
+    'usuario1': 'senha1',
+    'usuario2': 'senha2',
+}
+
 app = Flask(__name__)
 
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    username = data['username']
+    password = data['password']
+
+    if username in users and users[username] == password:
+        return jsonify({'success': True})
+    else:
+        return jsonify({'success': False})
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -25,12 +41,10 @@ def download(filename):
   return send_from_directory('./arquivos', filename)
 
 @app.route('/')
-def login():
+def form():
   return render_template('login.html')
 
-@app.route('/pagina')
-def php():
-  return render_template('index.php')
+
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=8080)
