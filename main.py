@@ -8,15 +8,8 @@ app = Flask(__name__)
 
 # Resto do seu código permanece inalterado
 
-if __name__ == '__main__':
-    username = 'junior'
-    password = '1234'
+user_db = UserDatabase()
 
-    user_db = UserDatabase()
-    if user_db.add_user(username, password):
-        print(f"Usuário '{username}' adicionado com sucesso!")
-    else:
-        print(f"Erro ao adicionar usuário '{username}'.")
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -24,6 +17,7 @@ def login():
     password = request.form['password']
 
     user_db = UserDatabase()
+ 
     user = user_db.get_user(username)
 
     if user and user[2] == password:  # O índice 2 corresponde à coluna "password" na tabela
