@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        /* style.css */
+/* style.css */
 
 /* Estilos para o corpo da página */
 body {
@@ -17,10 +10,6 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-}
-.msg{
-    margin-top: 10px;
-
 }
 
 /* Estilos para o container de login */
@@ -79,35 +68,3 @@ p a {
 p a:hover {
     color: #0056b3;
 }
-
-    </style>
-
-
-
-</head>
-<body>
-
-<div>
-    <div>
-        <h2 class="msg">
-            {% if message %}
-            <p id="msg">{{ message }}</p>
-             {% endif %}
-        </h2>
-        <div class="login-container">
-            <h2>Login</h2>
-            <form id="login-form" method="POST" action="/login">
-                <input type="text" name="username" placeholder="Nome de Usuário" required>
-                <input type="password" name="password" placeholder="Senha" required>
-                <button type="submit">Entrar</button>
-            </form>
-            <p><a href="/adicionar">Cadastrar</a>.</p>
-        </div>
-    </div>
-    
-
-</div>
-     
-
-</body>
-</html>

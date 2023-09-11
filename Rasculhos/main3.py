@@ -20,20 +20,17 @@ if __name__ == '__main__':
 
 @app.route('/login', methods=['POST'])
 def login():
-    username = request.form['username']
-    password = request.form['password']
+    data = request.get_json()
+    username = data['username']
+    password = data['password']
 
     user_db = UserDatabase()
     user = user_db.get_user(username)
 
     if user and user[2] == password:  # O índice 2 corresponde à coluna "password" na tabela
-      file_list = get_file_list()
-      image_gallery = get_image_gallery()
-      return render_template('index.html',
-                           file_list=file_list,
-                           image_gallery=image_gallery)
+        return jsonify({'success': True})
     else:
-         return render_template('erro.html')
+        return jsonify({'success': False})
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -50,27 +47,19 @@ def register():
 
     return render_template('login.html', message=message)
 
-@app.route('/upload_file', methods=['POST'])
-def upload_file():
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
     if request.method == 'POST':
         file = request.files['file']
         file.save(os.path.join('arquivos', file.filename))
+        return f'Arquivo "{file.filename}" carregado com sucesso! <a href="/">Voltar</a>'
+    else:
         file_list = get_file_list()
         image_gallery = get_image_gallery()
         return render_template('index.html',
-                           file_list=file_list,
-                           image_gallery=image_gallery)
-    else:
-        return jsonify({'message': 'Envie um arquivo usando POST.'})
-
-# Mantenha a rota original para a página de upload
-@app.route('/arquivos', methods=['GET'])
-def upload_page():
-    file_list = get_file_list()
-    image_gallery = get_image_gallery()
-    return render_template('index.html',
-                           file_list=file_list,
-                           image_gallery=image_gallery)
+                               file_list=file_list,
+                               image_gallery=image_gallery)
 
 @app.route('/arquivos/<filename>')
 def download(filename):
