@@ -11,6 +11,7 @@ app = Flask(__name__)
 user_db = UserDatabase()
 user_db.add_user("junior",'castevania')
 
+
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form['username']
@@ -25,7 +26,7 @@ def login():
     if user and user[2] == password:  # O índice 2 corresponde à coluna "password" na tabela
       file_list = get_file_list()
       image_gallery = get_image_gallery()
-      
+      print(user_db.get_all_users())
       return render_template('index.html',
                            file_list=file_list,
                            image_gallery=image_gallery)
