@@ -2,11 +2,11 @@ import os
 from flask import Flask, request, send_from_directory, render_template, request, jsonify
 from file_list_utils import get_file_list
 from image_gallery_utils import get_image_gallery
-from database import UserDatabase  # Importe a classe UserDatabase do arquivo database.py
-
+from db.database import UserDatabase  # Importe a classe UserDatabase do arquivo database.py
+from User import User
 app = Flask(__name__)
 
-# Resto do seu código permanece inalterado
+
 
 user_db = UserDatabase()
 
@@ -19,6 +19,8 @@ def login():
     user_db = UserDatabase()
  
     user = user_db.get_user(username)
+
+
 
     if user and user[2] == password:  # O índice 2 corresponde à coluna "password" na tabela
       file_list = get_file_list()
@@ -79,4 +81,4 @@ def ad():
     return render_template('adicionar.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=5000)

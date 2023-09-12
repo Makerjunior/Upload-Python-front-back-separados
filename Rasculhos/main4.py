@@ -2,7 +2,7 @@ import os
 from flask import Flask, request, send_from_directory, render_template, request, jsonify
 from file_list_utils import get_file_list
 from image_gallery_utils import get_image_gallery
-from database import UserDatabase  # Importe a classe UserDatabase do arquivo database.py
+from db.database import UserDatabase  # Importe a classe UserDatabase do arquivo database.py
 
 app = Flask(__name__)
 
